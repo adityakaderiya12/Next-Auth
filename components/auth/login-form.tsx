@@ -7,6 +7,7 @@ import { CardWrapper } from "./card-wrapper";
 
 import { Input } from "@/components/ui/input";
 
+import { login } from "@/actions/login";
 import {
   Form,
   FormControl,
@@ -30,7 +31,7 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    console.log(values);
+    login(values);
   };
   return (
     <CardWrapper
