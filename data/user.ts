@@ -10,3 +10,14 @@ export const getUserByEmail = async (email: String) => {
     return null;
   }
 };
+
+export const getUserById = async (id: String) => {
+  try {
+    const user = await db.User.findUnique({
+      where: { id },
+    });
+    return user;
+  } catch {
+    return null;
+  }
+};
