@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import { db } from "@/lib/db";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { UserRole } from "@prisma/client";
 import { getUserById } from "./data/user";
 
 export const {
@@ -12,6 +13,14 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
+    // async signIn({ user }: any) {
+    //   const existingUser = await getUserById(user.id);
+    //   if (!existingUser || !existingUser.emailVerified) {
+    //     return false;
+    //   }
+    //   return true;
+    // },
+
     async session({ token, session }: any) {
       console.log({
         sessionToken: token,
@@ -20,7 +29,7 @@ export const {
         session.user.id = token.sub;
       }
       if (token.role && session.user) {
-        session.user.role = token.role as "ADMIN" | "USER";
+        session.user.role = token.role as UserRole;
       }
       return session;
     },
