@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/data/user";
 import { db } from "@/lib/db";
 import { generateVerificationToken } from "@/lib/token";
-import { ImFacebook } from "react-icons/im";
 import * as z from "zod";
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validateFields = RegisterSchema.safeParse(values);
@@ -21,7 +20,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   if (existingUser) {
     return { error: "Email already in Use!" };
   }
-  await db.User.create({
+  await db.user.create({
     data: {
       name,
       email,
