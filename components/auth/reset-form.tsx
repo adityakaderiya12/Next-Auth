@@ -1,5 +1,6 @@
 "use client";
 
+import { reset } from "@/actions/reset";
 import {
   Form,
   FormControl,
@@ -35,13 +36,13 @@ export const ResetForm = () => {
     setSuccess("");
 
     console.log(values);
-    // startTransition(() => {
-    //   login(values).then((data) => {
-    //     setError(data?.error);
-    //     //Todo:when we add 2FA
-    //     setSuccess(data?.success);
-    //   });
-    // });
+    startTransition(() => {
+      reset(values).then((data) => {
+        setError(data?.error);
+        //Todo:when we add 2FA
+        setSuccess(data?.success);
+      });
+    });
   };
   return (
     <CardWrapper
