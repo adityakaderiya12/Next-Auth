@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { any } from "zod";
 
 export const getVerificationTokenByEmail = async (email: string) => {
   try {
